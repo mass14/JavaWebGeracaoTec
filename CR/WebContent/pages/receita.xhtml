@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/pages/template.xhtml"> 
+<h:head></h:head> 
+<body> 
+	<ui:define name="conteudo">
+		<h:form>	
+		
+         <p:panelGrid columns="2" cellpadding="10"  value="#{receitaMB.receita}" var="rec" >
+             <f:facet name="header">
+            	Receita
+        	</f:facet>
+				<h:outputText value="Id"/>
+				<h:outputText value="#{rec.id}"/>
+			
+				<h:outputText value="Nome"/>
+				<h:outputText value="#{rec.nome}"/>
+				
+				<h:outputText value="Tempo de Preparo"/>
+				<h:outputText value = "#{rec.tempoPreparo}"/>
+		
+				<h:outputText value="Valor deCusto"/>
+				<h:outputText value = "#{rec.valorCusto}"/>	
+			
+				<h:outputText value="Valor de Venda"/>
+				<h:outputText value = "#{rec.valorVenda}"/>	
+				
+				<h:outputText value="Valor de Mão de Obra"/>
+				<h:outputText value = "#{rec.valorMaoDeObra}"/>	
+				
+				<h:outputText value="Valor de Ingredientes"/>
+				<h:outputText value = "#{rec.valorIngredientes}"/>			
+			
+				<h:outputText value="Porcentagem Mao De Obra"/>
+				<h:outputText value = "#{rec.porcentagemMaoDeObra}"/>
+				
+				<h:outputText value="Porcentagem Lucro"/>
+				<h:outputText value = "#{rec.porcentagemlucro}"/>
+				
+				<h:outputText value="Está Ativa"/>
+				<h:outputText value = "#{rec.flAtiva}"/>							
+           
+        </p:panelGrid>
+        
+         <p:dataTable>
+           	<p:column headerText="Modo De Preparo" >
+           		<h:outputText value="#{receitaMB.receita.modoPreparo}"/>						
+        	</p:column>
+        </p:dataTable> 
+ 
+	<p:dataTable var="ing" value="#{ReceitaMB.ingrediente}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+       <f:facet name="header">
+            Ingredientes
+        </f:facet>      
+        <p:column headerText="Id" sortBy="#{ing.id}">
+            <h:outputText value="#{ing.id}" />
+        </p:column>   
+         <p:column headerText="Nome" >
+            <h:outputText value="#{ing.nome}" />
+        </p:column>        
+         <p:column headerText="Fornecedor">
+            <h:outputText value="#{ing.fornecedor}" />
+        </p:column>        
+         <p:column headerText="Marca">
+            <h:outputText value="#{ing.marca}" />
+        </p:column>        
+         <p:column headerText="Unidade de Medida">
+            <h:outputText value="#{ing.unidadeMedida}" />
+        </p:column>        
+         <p:column headerText="Valor por unidade">
+            <h:outputText value="#{ing.valorUniade}" />
+        </p:column>        
+         <p:column headerText="Quantidade">
+            <h:outputText value="#{ing.quantidade}" />
+        </p:column>        
+         <p:column headerText="Valor total">
+            <h:outputText value="#{ing.valorReal}" />
+        </p:column>       
+     </p:dataTable>
+
+</h:form>	
+			
+	</ui:define>
+			
+</body> 
+</ui:composition>

@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/pages/template.xhtml"> 
+
+<h:head></h:head> 
+<body> 
+	<ui:define name="conteudo"> 
+	<h:form>
+		<p:panelGrid columns="2" value="#{pedidoMB.pedido}" var="ped">
+			
+			<p:outputText value="Id: "/>
+			<p:outputText value="#{ped.id}"/>
+					
+			<p:outputText value="Cliente: "/>
+			<p:outputText value="#{ped.cliente.nome}"/>
+			
+			<p:outputText value="Email: "/>
+			<p:outputText value = "#{cli.email}"/>
+			
+			<p:panelGrid columns="2" value="#{pedidoMB.receitas}" var="rec">
+				<p:outputText value="Receita: "/>
+				<p:outputText value="#{rec.nome}"/>	
+				
+			</p:panelGrid>			
+			
+				<p:commandButton value="Editar" >
+					<f:setPropertyActionListener value="#{cli}" target="#{clienteMB.cliente}" />
+				</p:commandButton>
+				<p:commandButton action="#{clienteMB.deletar}" value="Excluir" >
+					<f:setPropertyActionListener value="#{cli}" target="#{clienteMB.cliente}" />
+				</p:commandButton>
+		</p:panelGrid>
+		<p:panelGrid columns="3">
+			<p:outputText value="Nome: " />
+			<p:inputText id="inNome" value="#{clienteMB.cliente.nome}" />
+			<h:message for="inNome"/>
+			
+			<p:outputText value="E-mail: " />
+			<p:inputText id="inEmail" value="#{clienteMB.cliente.email}" />
+			<h:message for="inEmail"/>
+			
+			<p:outputText value="Foto: " />
+			<p:password id="inFoto" value="#{clienteMB.cliente.foto}" feedback="true"/>
+			<h:message for="inFoto"/>
+
+		</p:panelGrid>
+		<p:outputText value="------" />
+		
+		<p:panelGrid columns="2">
+			<p:outputText value="Telefone Principal: " />
+			<p:inputText value="#{clienteMB.contato.telefone}" />
+			
+			<p:outputText value="Telefone Secundário: " />
+			<p:inputText value="#{clienteMB.contato.telefoneSecundario}" />
+			
+			<p:outputText value="Endereço: " />
+			<p:inputText value="#{usuarioMB.contato.rua}" />
+			
+			<p:outputText value="Número: " />
+			<p:inputText value="#{clienteMB.contato.numero}" />
+			
+			<p:outputText value="Complemento: " />
+			<p:inputText value="#{clienteMB.contato.complemento}" />
+			
+			<h:outputText value="Cep: " />
+			<p:inputText value="#{clienteMB.contato.cep}" />
+			
+			<p:outputText value="Cidade: " />
+			<p:inputText value="#{clienteMB.contato.cidade}" />
+			
+			<p:outputText value="Estado: " />
+			<p:inputText value="#{clienteMB.contato.estado}" />
+			
+			<p:outputText value="País: " />
+			<p:inputText value="#{clienteMB.contato.pais}" />
+			
+			<p:commandButton action="#{clienteMB.addContato}" value="Add" />
+		</p:panelGrid>
+		<p:panelGrid>
+			<h:dataTable value="#{clienteMB.cliente.contatos}" var="cont">
+				<p:column>#{cont.telefone}</p:column>	
+				<p:column>#{cont.telefoneSecundario}</p:column>
+				<p:column>#{cont.rua}</p:column>
+				<p:column>#{cont.numero}</p:column>
+				<p:column>#{cont.complemento}</p:column>
+				<p:column>#{cont.cep}</p:column>
+				<p:column>#{cont.cidade}</p:column>
+				<p:column>#{cont.estado}</p:column>
+				<p:column>#{cont.pais}</p:column>
+			</h:dataTable>
+		</p:panelGrid>
+		<h:commandButton action="#{clienteMB.salvar}" value="Salvar" />
+	</h:form>
+</ui:define>
+</body> 
+</ui:composition>

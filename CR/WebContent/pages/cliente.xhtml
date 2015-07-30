@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/pages/template.xhtml"> 
+<h:head></h:head> 
+<body>
+<ui:define name="conteudo"> 
+	<h:form>
+		<p:dataTable value="#{clienteMB.cliente}" var="cli">
+			<h:outputText value="Id"/>
+			<h:outputText value="#{cli.id}"/>
+					
+			<h:outputText value="Nome"/>
+			<h:outputText value="#{cli.nome}"/>
+			
+			<h:outputText value="Email"/>
+			<h:outputText value = "#{cli.email}"/>				
+			
+			<h:commandButton value="Editar" >
+				<f:setPropertyActionListener value="#{cli}" target="#{clienteMB.cliente}" />
+				<f:ajax execute="@this" render="@form" />
+			</h:commandButton>
+			<h:commandButton action="#{clienteMB.deletar}" value="Excluir" >
+				<f:setPropertyActionListener value="#{cli}" target="#{clienteMB.cliente}" />
+				<f:ajax execute="@this" render="@form" />
+			</h:commandButton>
+		</p:dataTable>
+		<p:panelGrid columns="2">
+			<h:outputText value="Id: " />
+			<h:outputText value="#{clienteMB.cliente.id}" />
+			
+			<h:outputText value="Nome: " />
+			<h:inputText id="inNome" value="#{clienteMB.cliente.nome}" />
+			
+			<h:outputText value="E-mail: " />
+			<h:inputText id="inEmail" value="#{clienteMB.cliente.email}" />
+			
+		</p:panelGrid>
+		<h:outputText value="------" />
+		
+		<p:panelGrid columns="2">
+			<h:outputText value="Telefone Principal: " />
+			<h:inputText value="#{clienteMB.contato.telefone}" />
+			
+			<h:outputText value="Telefone Secundário: " />
+			<h:inputText value="#{clienteMB.contato.telefoneSecundario}" />
+			
+			<h:outputText value="Endereço: " />
+			<h:inputText value="#{usuarioMB.contato.rua}" />
+			
+			<h:outputText value="Número: " />
+			<h:inputText value="#{clienteMB.contato.numero}" />
+			
+			<h:outputText value="Complemento: " />
+			<h:inputText value="#{clienteMB.contato.complemento}" />
+			
+			<h:outputText value="Cep: " />
+			<h:inputText value="#{clienteMB.contato.cep}" />
+			
+			<h:outputText value="Cidade: " />
+			<h:inputText value="#{clienteMB.contato.cidade}" />
+			
+			<h:outputText value="Estado: " />
+			<h:inputText value="#{clienteMB.contato.estado}" />
+			
+			<h:outputText value="País: " />
+			<h:inputText value="#{clienteMB.contato.pais}" />
+			
+			<p:commandButton action="#{clienteMB.addContato}" value="Add" />
+		</p:panelGrid>
+		<p:panelGrid>
+			<h:dataTable value="#{clienteMB.cliente.contatos}" var="cont">
+				<p:column>#{cont.telefone}</p:column>	
+				<p:column>#{cont.telefoneSecundario}</p:column>
+				<p:column>#{cont.rua}</p:column>
+				<p:column>#{cont.numero}</p:column>
+				<p:column>#{cont.complemento}</p:column>
+				<p:column>#{cont.cep}</p:column>
+				<p:column>#{cont.cidade}</p:column>
+				<p:column>#{cont.estado}</p:column>
+				<p:column>#{cont.pais}</p:column>
+			</h:dataTable>
+		</p:panelGrid>
+		<p:commandButton action="#{clienteMB.salvar}" value="Salvar">
+			<f:setPropertyActionListener value="#{cli}" target="#{clienteMB.cliente}" />
+			<f:ajax execute="@this" render="@form" />
+		</p:commandButton>
+	</h:form>
+</ui:define>
+</body> 
+</ui:composition>
